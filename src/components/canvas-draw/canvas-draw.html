@@ -1,18 +1,165 @@
-<ion-toolbar id="top-toolbar">
+
+
+<ion-content class="no-scroll">
+  <ion-toolbar #topToolbar id="top-toolbar">
     <ion-buttons left>
-        <button *ngFor="let colour of availableColours" icon-only ion-button (click)="changeColour(colour)">
-            <ion-icon [style.color]="colour" name="brush"></ion-icon>
-        </button>
+      <button class="pick-color-btn" icon-only ion-button (click)="pickColour()">
+        <ion-icon [style.color]="currentColour" name="square"></ion-icon>
+      </button>
+      <button icon-only ion-button (click)="insertImage()">
+        <ion-icon [style.color]="'#000000'" name="images"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-buttons right>
-        <button style="border: 1px solid #cecece;" ion-button icon-only style.color="#fff" (click)="changeColour('#fff')">
-            <ion-icon style="color: #fff;" name="square"></ion-icon>
-        </button>
+      <button style="border: 1px solid #cecece;" ion-button icon-only style.color="#fff" (click)="changeColour('#fff')">
+        <ion-icon style="color: #fff;" name="square"></ion-icon>
+      </button>
     </ion-buttons>
-</ion-toolbar>
- 
-<canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
- 
+  </ion-toolbar>
+  <div #colorList id="ListColour" [hidden]="colourButtonOpened==false" class="fadeIn">
+    <ion-grid>
+      <ion-row>
+        <ion-col style="background:#330000" (tap)="changeColour('#330000')"></ion-col>
+        <ion-col style="background:#331900" (tap)="changeColour('#331900')"> </ion-col>
+        <ion-col style="background:#333300" (tap)="changeColour('#333300')"> </ion-col>
+        <ion-col style="background:#193300" (tap)="changeColour('#193300')"> </ion-col>
+        <ion-col style="background:#003300" (tap)="changeColour('#003300')"> </ion-col>
+        <ion-col style="background:#003319" (tap)="changeColour('#003319')"> </ion-col>
+        <ion-col style="background:#003333" (tap)="changeColour('#003333')"> </ion-col>
+        <ion-col style="background:#001933" (tap)="changeColour('#001933')"> </ion-col>
+        <ion-col style="background:#000033" (tap)="changeColour('#000033')"> </ion-col>
+        <ion-col style="background:#190033" (tap)="changeColour('#190033')"> </ion-col>
+        <ion-col style="background:#330033" (tap)="changeColour('#330033')"> </ion-col>
+        <ion-col style="background:#330019" (tap)="changeColour('#330019')"> </ion-col>
+        <ion-col style="background:#000000" (tap)="changeColour('#000000')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#660000" (tap)="changeColour('#660000')"> </ion-col>
+        <ion-col style="background:#663300" (tap)="changeColour('#663300')"> </ion-col>
+        <ion-col style="background:#666600" (tap)="changeColour('#666600')"> </ion-col>
+        <ion-col style="background:#336600" (tap)="changeColour('#336600')"> </ion-col>
+        <ion-col style="background:#006600" (tap)="changeColour('#006600')"> </ion-col>
+        <ion-col style="background:#006633" (tap)="changeColour('#006633')"> </ion-col>
+        <ion-col style="background:#006666" (tap)="changeColour('#006666')"> </ion-col>
+        <ion-col style="background:#003366" (tap)="changeColour('#003366')"> </ion-col>
+        <ion-col style="background:#000066" (tap)="changeColour('#000066')"> </ion-col>
+        <ion-col style="background:#330066" (tap)="changeColour('#330066')"> </ion-col>
+        <ion-col style="background:#660066" (tap)="changeColour('#660066')"> </ion-col>
+        <ion-col style="background:#660033" (tap)="changeColour('#660033')"> </ion-col>
+        <ion-col style="background:#202020" (tap)="changeColour('#202020')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#990000" (tap)="changeColour('#990000')"> </ion-col>
+        <ion-col style="background:#994C00" (tap)="changeColour('#994C00')"> </ion-col>
+        <ion-col style="background:#999900" (tap)="changeColour('#999900')"> </ion-col>
+        <ion-col style="background:#4C9900" (tap)="changeColour('#4C9900')"> </ion-col>
+        <ion-col style="background:#009900" (tap)="changeColour('#009900')"> </ion-col>
+        <ion-col style="background:#00994C" (tap)="changeColour('#00994C')"> </ion-col>
+        <ion-col style="background:#009999" (tap)="changeColour('#009999')"> </ion-col>
+        <ion-col style="background:#004C99" (tap)="changeColour('#004C99')"> </ion-col>
+        <ion-col style="background:#000099" (tap)="changeColour('#000099')"> </ion-col>
+        <ion-col style="background:#4C0099" (tap)="changeColour('#4C0099')"> </ion-col>
+        <ion-col style="background:#990099" (tap)="changeColour('#990099')"> </ion-col>
+        <ion-col style="background:#99004C" (tap)="changeColour('#99004C')"> </ion-col>
+        <ion-col style="background:#404040" (tap)="changeColour('#404040')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#CC0000" (tap)="changeColour('#CC0000')"> </ion-col>
+        <ion-col style="background:#CC6600" (tap)="changeColour('#CC6600')"> </ion-col>
+        <ion-col style="background:#CCCC00" (tap)="changeColour('#CCCC00')"> </ion-col>
+        <ion-col style="background:#66CC00" (tap)="changeColour('#66CC00')"> </ion-col>
+        <ion-col style="background:#00CC00" (tap)="changeColour('#00CC00')"> </ion-col>
+        <ion-col style="background:#00CC66" (tap)="changeColour('#00CC66')"> </ion-col>
+        <ion-col style="background:#00CCCC" (tap)="changeColour('#00CCCC')"> </ion-col>
+        <ion-col style="background:#0066CC" (tap)="changeColour('#0066CC')"> </ion-col>
+        <ion-col style="background:#0000CC" (tap)="changeColour('#0000CC')"> </ion-col>
+        <ion-col style="background:#6600CC" (tap)="changeColour('#6600CC')"> </ion-col>
+        <ion-col style="background:#CC00CC" (tap)="changeColour('#CC00CC')"> </ion-col>
+        <ion-col style="background:#CC0066" (tap)="changeColour('#CC0066')"> </ion-col>
+        <ion-col style="background:#606060" (tap)="changeColour('#606060')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#FF0000" (tap)="changeColour('#FF0000')"> </ion-col>
+        <ion-col style="background:#FF8000" (tap)="changeColour('#FF8000')"> </ion-col>
+        <ion-col style="background:#FFFF00" (tap)="changeColour('#FFFF00')"> </ion-col>
+        <ion-col style="background:#80FF00" (tap)="changeColour('#80FF00')"> </ion-col>
+        <ion-col style="background:#00FF00" (tap)="changeColour('#00FF00')"> </ion-col>
+        <ion-col style="background:#00FF80" (tap)="changeColour('#00FF80')"> </ion-col>
+        <ion-col style="background:#00FFFF" (tap)="changeColour('#00FFFF')"> </ion-col>
+        <ion-col style="background:#0080FF" (tap)="changeColour('#0080FF')"> </ion-col>
+        <ion-col style="background:#0000FF" (tap)="changeColour('#0000FF')"> </ion-col>
+        <ion-col style="background:#7F00FF" (tap)="changeColour('#7F00FF')"> </ion-col>
+        <ion-col style="background:#FF00FF" (tap)="changeColour('#FF00FF')"> </ion-col>
+        <ion-col style="background:#FF007F" (tap)="changeColour('#FF007F')"> </ion-col>
+        <ion-col style="background:#808080" (tap)="changeColour('#808080')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#FF3333" (tap)="changeColour('#FF3333')"> </ion-col>
+        <ion-col style="background:#FF9933" (tap)="changeColour('#FF9933')"> </ion-col>
+        <ion-col style="background:#FFFF33" (tap)="changeColour('#FFFF33')"> </ion-col>
+        <ion-col style="background:#99FF33" (tap)="changeColour('#99FF33')"> </ion-col>
+        <ion-col style="background:#33FF33" (tap)="changeColour('#33FF33')"> </ion-col>
+        <ion-col style="background:#33FF99" (tap)="changeColour('#33FF99')"> </ion-col>
+        <ion-col style="background:#33FFFF" (tap)="changeColour('#33FFFF')"> </ion-col>
+        <ion-col style="background:#3399FF" (tap)="changeColour('#3399FF')"> </ion-col>
+        <ion-col style="background:#3333FF" (tap)="changeColour('#3333FF')"> </ion-col>
+        <ion-col style="background:#9933FF" (tap)="changeColour('#9933FF')"> </ion-col>
+        <ion-col style="background:#FF33FF" (tap)="changeColour('#FF33FF')"> </ion-col>
+        <ion-col style="background:#FF3399" (tap)="changeColour('#FF3399')"> </ion-col>
+        <ion-col style="background:#A0A0A0" (tap)="changeColour('#A0A0A0')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#FF6666" (tap)="changeColour('#FF6666')"> </ion-col>
+        <ion-col style="background:#FFB266" (tap)="changeColour('#FFB266')"> </ion-col>
+        <ion-col style="background:#FFFF66" (tap)="changeColour('#FFFF66')"> </ion-col>
+        <ion-col style="background:#B2FF66" (tap)="changeColour('#B2FF66')"> </ion-col>
+        <ion-col style="background:#66FF66" (tap)="changeColour('#66FF66')"> </ion-col>
+        <ion-col style="background:#66FFB2" (tap)="changeColour('#66FFB2')"> </ion-col>
+        <ion-col style="background:#66FFFF" (tap)="changeColour('#66FFFF')"> </ion-col>
+        <ion-col style="background:#66B2FF" (tap)="changeColour('#66B2FF')"> </ion-col>
+        <ion-col style="background:#6666FF" (tap)="changeColour('#6666FF')"> </ion-col>
+        <ion-col style="background:#B266FF" (tap)="changeColour('#B266FF')"> </ion-col>
+        <ion-col style="background:#FF66FF" (tap)="changeColour('#FF66FF')"> </ion-col>
+        <ion-col style="background:#FF66B2" (tap)="changeColour('#FF66B2')"> </ion-col>
+        <ion-col style="background:#C0C0C0" (tap)="changeColour('#C0C0C0')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#FF9999" (tap)="changeColour('#FF9999')"> </ion-col>
+        <ion-col style="background:#FFCC99" (tap)="changeColour('#FFCC99')"> </ion-col>
+        <ion-col style="background:#FFFF99" (tap)="changeColour('#FFFF99')"> </ion-col>
+        <ion-col style="background:#CCFF99" (tap)="changeColour('#CCFF99')"> </ion-col>
+        <ion-col style="background:#99FF99" (tap)="changeColour('#99FF99')"> </ion-col>
+        <ion-col style="background:#99FFCC" (tap)="changeColour('#99FFCC')"> </ion-col>
+        <ion-col style="background:#99FFFF" (tap)="changeColour('#99FFFF')"> </ion-col>
+        <ion-col style="background:#99CCFF" (tap)="changeColour('#99CCFF')"> </ion-col>
+        <ion-col style="background:#9999FF" (tap)="changeColour('#9999FF')"> </ion-col>
+        <ion-col style="background:#CC99FF" (tap)="changeColour('#CC99FF')"> </ion-col>
+        <ion-col style="background:#FF99FF" (tap)="changeColour('#FF99FF')"> </ion-col>
+        <ion-col style="background:#FF99CC" (tap)="changeColour('#FF99CC')"> </ion-col>
+        <ion-col style="background:#E0E0E0" (tap)="changeColour('#E0E0E0')"> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="background:#FFCCCC" (tap)="changeColour('#FFCCCC')"> </ion-col>
+        <ion-col style="background:#FFE5CC" (tap)="changeColour('#FFE5CC')"> </ion-col>
+        <ion-col style="background:#FFFFCC" (tap)="changeColour('#FFFFCC')"> </ion-col>
+        <ion-col style="background:#E5FFCC" (tap)="changeColour('#E5FFCC')"> </ion-col>
+        <ion-col style="background:#CCFFCC" (tap)="changeColour('#CCFFCC')"> </ion-col>
+        <ion-col style="background:#CCFFE5" (tap)="changeColour('#CCFFE5')"> </ion-col>
+        <ion-col style="background:#CCFFFF" (tap)="changeColour('#CCFFFF')"> </ion-col>
+        <ion-col style="background:#CCE5FF" (tap)="changeColour('#CCE5FF')"> </ion-col>
+        <ion-col style="background:#CCCCFF" (tap)="changeColour('#CCCCFF')"> </ion-col>
+        <ion-col style="background:#E5CCFF" (tap)="changeColour('#E5CCFF')"> </ion-col>
+        <ion-col style="background:#FFCCFF" (tap)="changeColour('#FFCCFF')"> </ion-col>
+        <ion-col style="background:#FFCCE5" (tap)="changeColour('#FFCCE5')"> </ion-col>
+        <ion-col style="background:#FFFFFF" (tap)="changeColour('#FFFFFF')"> </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <img id="clip-art" (touchstart)="handleStart($event)" (touchmove)="handleMove($event)" #clipArt src="assets/twice" [hidden]="editMode != EDIT_MODE.IMAGE"/>
+  <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
+</ion-content>
+
 <ion-toolbar id="bottom-toolbar">
     <ion-buttons left>
         <button color="dark" ion-button icon-only (click)="clearCanvas()"><ion-icon name="trash"></ion-icon></button>

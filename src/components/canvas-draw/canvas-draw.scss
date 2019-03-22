@@ -1,3 +1,15 @@
+@keyframes fadeIn {
+  from {
+    height: 0%;
+    opacity: 0;
+  }
+
+  to {
+    height: 100%;
+    opacity: 0.8;
+  }
+}
+
 canvas-draw {
     height: 100%;
     width: 100%;
@@ -12,4 +24,38 @@ canvas-draw {
 #bottom-toolbar {
     position: absolute;
     bottom: 0;
+}
+
+.no-scroll .scroll-content{
+  overflow: hidden;
+}
+
+ion-grid {
+  height: 40%;
+
+  ion-row {
+    height: 13.33%;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+#ListColour {
+  background-color: white !important;
+  position: fixed !important;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  opacity: 0.8
+}
+
+#clip-art {
+  background-color: white !important;
+  position: fixed !important;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
